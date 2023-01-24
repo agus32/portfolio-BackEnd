@@ -1,7 +1,7 @@
 import React, {Fragment, useState, useRef, useEffect} from "react";
 import { TodoList } from "./components/TodoList";
 import { v4 as uuidv4 } from "uuid";
-
+import { Button, ButtonGroup, Alert } from "react-bootstrap";
 
 export function App(){
     const[todos,setTodos] = useState([
@@ -41,13 +41,15 @@ export function App(){
         todoTaskRef.current.value = null;
     };
     return (
-        <Fragment>
+        <div className="container text-center">
             <TodoList todos={todos} toggleTodo={toggleTodo}/>
+            <ButtonGroup className="mb-3 mt-2">
             <input ref={todoTaskRef} type="text" placeholder="Nueva Tarea" />
-            <button onClick={handleTodoAdd}>➕​</button>
-            <button onClick={handleClearAll}>❌​</button>
-            <div>Te quedan {todos.filter((todo) => !todo.completed).length} tareas por terminar</div>
-        </Fragment>
+            <Button onClick={handleTodoAdd} variant="outline-success" >➕​</Button>
+            <Button onClick={handleClearAll} variant="outline-danger" >❌​</Button>
+            </ButtonGroup>
+            <Alert variant="primary">Te quedan {todos.filter((todo) => !todo.completed).length} tareas por terminar</Alert>
+        </div>
     
     );
 
